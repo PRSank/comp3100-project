@@ -17,7 +17,7 @@ public class MyClient {
             str2=din.readLine();
             System.out.println("Server says:"+str2);
             
-            str = "AUTH hojo\n";
+            str = "AUTH hojoo\n";
             dout.write((str).getBytes());
             dout.flush();
 
@@ -45,11 +45,18 @@ public class MyClient {
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
-            str2=din.readLine();
-            System.out.println("Server says:"+str2);
+
+            str = "OK\n";
+            dout.write((str).getBytes());
+            dout.flush();
 
             str2=din.readLine();
             System.out.println("Server says:"+str2);
+
+
+            str = "SCHD 0 super-silk 0\n";
+            dout.write((str).getBytes());
+            dout.flush();
 
             str2=din.readLine();
             System.out.println("Server says:"+str2);
@@ -61,11 +68,10 @@ public class MyClient {
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
-
-            // str = "QUIT\n";
-            // dout.write((str).getBytes());
-            // dout.flush();
-
+            str = "REDY\n";
+            dout.write((str).getBytes());
+            dout.flush();   
+            
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
