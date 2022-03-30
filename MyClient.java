@@ -4,35 +4,69 @@ import java.net.*;
 public class MyClient {
     public static void main(String[] args) {
         try {
-            Socket s = new Socket("localhost",6666);
-            DataInputStream din = new DataInputStream(s.getInputStream());
+            Socket s = new Socket("127.0.0.1",50000);
+            BufferedReader din = new BufferedReader(new InputStreamReader(s.getInputStream()));
             DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             
             String str = "",str2="";
-            str = "Helo";
-            dout.writeUTF(str);
+            str = "HELO\n";
+            dout.write((str).getBytes());
             dout.flush();
-            try {
-                Thread.sleep(5000);
-            } catch(Exception e) {
-                System.out.println(e);
-            }
+            
 
-            str2=din.readUTF();
+            str2=din.readLine();
             System.out.println("Server says:"+str2);
             
-            str = "BYE";
-            dout.writeUTF(str);
+            str = "AUTH hojo\n";
+            dout.write((str).getBytes());
             dout.flush();
 
-            try {
-                Thread.sleep(1500);
-            } catch(Exception e) {
-                System.out.println(e);
-            }
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
 
-            str2=din.readUTF();
+            str = "REDY\n";
+            dout.write((str).getBytes());
+            dout.flush();
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+            str = "GETS All\n";
+            dout.write((str).getBytes());
+            dout.flush();
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+            str = "OK\n";
+            dout.write((str).getBytes());
+            dout.flush();
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+            str = "OK\n";
+            dout.write((str).getBytes());
+            dout.flush();
+
+            str2=din.readLine();
+            System.out.println("Server says:"+str2);
+
+
+            // str = "QUIT\n";
+            // dout.write((str).getBytes());
+            // dout.flush();
+
+            str2=din.readLine();
             System.out.println("Server says:"+str2);
 
             dout.close();
