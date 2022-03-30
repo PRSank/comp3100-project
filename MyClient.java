@@ -17,7 +17,7 @@ public class MyClient {
             str2=din.readLine();
             System.out.println("Server says:"+str2);
             
-            str = "AUTH hojoo\n";
+            str = "AUTH PRSank\n";
             dout.write((str).getBytes());
             dout.flush();
 
@@ -38,20 +38,48 @@ public class MyClient {
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
+            //Finding amount of servers
+            String[] dataArr = str2.split(" ");
+            int nRecs = Integer.parseInt(dataArr[1]);
+
+            // end
             str = "OK\n";
             dout.write((str).getBytes());
             dout.flush();
+
+            //Cataloging Server sizes
+            String lType="";
+            int lCore = 0;
+            int sCount = 0;
+            for(int i =0; i < nRecs;++i) {
+                str2=din.readLine();
+                String[] str3 = str2.split(" ");
+
+                if(lCore < Integer.parseInt(str3[4])){
+                    lCore = Integer.parseInt(str3[4]);
+                    lType = str3[0];
+                }
+
+                if(lType.equals(str3[0])) {
+                    sCount = 1 + Integer.parseInt(str3[1]);
+                }
+    
+                System.out.println("Server says:"+str2);
+            }
+            System.out.println("Largest Server Type: " +lType+ " Cores: " +lCore +" Count "+ sCount);
+
+
 
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
 
-            str = "OK\n";
-            dout.write((str).getBytes());
-            dout.flush();
+            // str = "OK\n";
+            // dout.write((str).getBytes());
+            // dout.flush();
 
-            str2=din.readLine();
-            System.out.println("Server says:"+str2);
+            // str2=din.readLine();
+            // System.out.println("Server says:"+str2);
 
 
             str = "SCHD 0 super-silk 0\n";
