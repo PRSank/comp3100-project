@@ -69,26 +69,6 @@ public class MyClient {
             System.out.println("Largest Server Type: " +lType+ " Cores: " +lCore +" Count "+ sCount);
 
 
-
-            str2=din.readLine();
-            System.out.println("Server says:"+str2);
-
-
-            // str = "OK\n";
-            // dout.write((str).getBytes());
-            // dout.flush();
-
-            // str2=din.readLine();
-            // System.out.println("Server says:"+str2);
-
-
-            str = "SCHD 0 super-silk 0\n";
-            dout.write((str).getBytes());
-            dout.flush();
-
-            str2=din.readLine();
-            System.out.println("Server says:"+str2);
-
             str = "OK\n";
             dout.write((str).getBytes());
             dout.flush();
@@ -96,10 +76,41 @@ public class MyClient {
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
-            str = "REDY\n";
+            int job = 0;
+            int serverID = 0;
+
+            while(!str2.equals("NONE")){
+                
+                str = "REDY\n";
+                dout.write((str).getBytes());
+                dout.flush();
+
+                str2=din.readLine();
+                System.out.println("Server says:"+str2);
+
+                String[] tester = str2.split(" ");
+
+                if(tester[0].equals("JOBN")){
+                    str = "SCHD " + job +" "+ lType +" "+ serverID+ "\n";
+                    dout.write((str).getBytes());
+                    dout.flush();
+
+                    job++;
+                    serverID++;
+                    if(serverID >= sCount){
+                        serverID = 0;
+                    }
+                    str2=din.readLine();
+                    System.out.println("Server says:"+str2);
+                }
+
+                 
+            }
+
+            str = "QUIT\n";
             dout.write((str).getBytes());
-            dout.flush();   
-            
+            dout.flush();
+
             str2=din.readLine();
             System.out.println("Server says:"+str2);
 
