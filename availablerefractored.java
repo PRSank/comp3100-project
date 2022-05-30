@@ -11,7 +11,7 @@ public class availablerefractored {
             DataOutputStream dout = new DataOutputStream(s.getOutputStream());
 
             String sendSTR = "", recieveSTR = "";
-            boolean capFlag = false; // Flag to see if capable keyword necessary
+            
 
             // Authentication Handshake
             sendSTR = "HELO\n";
@@ -97,7 +97,6 @@ public class availablerefractored {
                         dout.write((sendSTR).getBytes());
                         dout.flush();
                         System.out.println("Client says:" + sendSTR);
-                        capFlag = true;
 
                     }
                     // Parsing through server information
@@ -114,16 +113,15 @@ public class availablerefractored {
                         }
                     }
 
-                    // if (capFlag != true) {
-                        sendSTR = "OK\n";
-                        dout.write((sendSTR).getBytes());
-                        dout.flush();
-                        System.out.println("Client says:" + sendSTR);
+                    
+                    sendSTR = "OK\n";
+                    dout.write((sendSTR).getBytes());
+                    dout.flush();
+                    System.out.println("Client says:" + sendSTR);
 
-                        recieveSTR = din.readLine();
-                        System.out.println("Server says:" + recieveSTR);
-                    // }
-                    capFlag = false;
+                    recieveSTR = din.readLine();
+                    System.out.println("Server says:" + recieveSTR);
+                    
 
                     // Schedules job to a relevant server
                     sendSTR = "SCHD " + job + " " + lType + " " + serverID + "\n";
